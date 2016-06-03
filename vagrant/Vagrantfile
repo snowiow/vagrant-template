@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  #Set the preferred ISO
+  config.vm.box = "ubuntu/trusty64"
+  
+  #Create a private network for our host and guest system
+  config.vm.network "private_network", ip: "192.168.33.10"
+
+  #Setup the synced location for our code base
+  config.vm.synced_folder "../", "/vagrant/projects/"
+
+  #List of shell provisioners
+  config.vm.provision "shell", path: "sh/update.sh"
+  config.vm.provision "shell", path: "sh/apache.sh"
+  config.vm.provision "shell", path: "sh/mysql.sh"
+  config.vm.provision "shell", path: "sh/php.sh"
+  config.vm.provision "shell", path: "sh/phpmyadmin.sh"
+  config.vm.provision "shell", path: "sh/cleanup.sh"
+
+  #List of File provisioners
+  config.vm.provision "file", source: "conf/apache2.conf", destination: "/vagrant/tmp/apache2.conf"
+  config.vm.provision "file", source: "conf/my.cnf", destination: "/vagrant/tmp/my.cnf"
+  config.vm.provision "file", source: "conf/mysite.conf", destination: "/vagrant/tmp/mysite.conf"
+end
