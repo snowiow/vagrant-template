@@ -9,5 +9,4 @@ else
 fi
 
 #Make changes effective
-service apache2 restart
-
+systemctl restart apache2

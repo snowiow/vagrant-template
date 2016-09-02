@@ -16,14 +16,10 @@
 # It has been reported that passwords should be enclosed with ticks/quotes
 # escpecially if they contain "#" chars...
 # Remember to edit /etc/mysql/debian.cnf when changing the socket location.
-[client]
-port		= 3306
-socket		= /var/run/mysqld/mysqld.sock
 
 # Here is entries for some specific programs
 # The following values assume you have at least 32M ram
 
-# This was formally known as [safe_mysqld]. Both versions are currently parsed.
 [mysqld_safe]
 socket		= /var/run/mysqld/mysqld.sock
 nice		= 0
@@ -48,13 +44,13 @@ bind-address		= 0.0.0.0
 #
 # * Fine Tuning
 #
-key_buffer		= 16M
+key_buffer_size		= 16M
 max_allowed_packet	= 16M
 thread_stack		= 192K
 thread_cache_size       = 8
 # This replaces the startup script and checks MyISAM tables if needed
 # the first time they are touched
-myisam-recover         = BACKUP
+myisam-recover-options  = BACKUP
 #max_connections        = 100
 #table_cache            = 64
 #thread_concurrency     = 10
@@ -87,7 +83,7 @@ log_error = /var/log/mysql/error.log
 #server-id		= 1
 #log_bin			= /var/log/mysql/mysql-bin.log
 expire_logs_days	= 10
-max_binlog_size         = 100M
+max_binlog_size   = 100M
 #binlog_do_db		= include_database_name
 #binlog_ignore_db	= include_database_name
 #
@@ -106,22 +102,4 @@ max_binlog_size         = 100M
 # ssl-ca=/etc/mysql/cacert.pem
 # ssl-cert=/etc/mysql/server-cert.pem
 # ssl-key=/etc/mysql/server-key.pem
-
-
-
-[mysqldump]
-quick
-quote-names
-max_allowed_packet	= 16M
-
-[mysql]
-#no-auto-rehash	# faster start of mysql but no tab completition
-
-[isamchk]
-key_buffer		= 16M
-
-#
-# * IMPORTANT: Additional settings that can override those from this file!
-#   The files must end with '.cnf', otherwise they'll be ignored.
-#
-!includedir /etc/mysql/conf.d/
+sql-mode=""

@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-apt-get install -y php5 libapache2-mod-php5 php5-mcrypt php5-curl php5-mysql    
+apt-get install -y php libapache2-mod-php php-mcrypt php-curl php-mysql    

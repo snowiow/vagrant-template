@@ -19,4 +19,4 @@ else
     >&2 echo "Error: phpmyadmin.conf not found"
 fi
 
-service apache2 restart
+systemctl restart apache2
